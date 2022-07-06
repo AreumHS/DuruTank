@@ -1,8 +1,7 @@
 const express = require('express');
-const { json } = require('stream/consumers');
 const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
 app.engine('html', require('ejs').renderFile);
 app.set("view engine", "ejs");
@@ -10,23 +9,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname + '/'));
 
-app.get('/control', function(req,res){
+app.get('/', function(req,res){
     res.render('control.html');
 });
 
-
-
-
 io.on('connection', (socket) => {
+    console.log("[ something logged in. ]");
+
     socket.on('login', (data) => {
         console.log(data.type + ' connected to server');
-
         socket.type = data.type;
     });
 
-    socket.on('input', (data) => {
+    socket.on('coninput', (data) => {
         console.log('Controller input val : ' + JSON.stringify(data));
+        socket.broadcast.emit('input', data);
+    })
 
+    socket.on('phoneinput', (data) => {
+        console.log('Controller input val : ' + JSON.stringify(data));
         socket.broadcast.emit('input', data);
     })
 
@@ -35,5 +36,4 @@ io.on('connection', (socket) => {
     });
 });
 
-
-server.listen(8081, function(){ console.log("Server Open : Port 8081") })
+http.listen(8081, () => console.log("server opened at 8081 -> 30001"));

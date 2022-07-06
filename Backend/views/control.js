@@ -1,9 +1,8 @@
 // websocket connect
 var socket = io();
-
-    socket.emit("login", {
-      type : "controller"
-    });
+socket.emit("login", {
+  type : "controller"
+});
 
 // controller support
 
