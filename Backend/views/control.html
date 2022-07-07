@@ -1,57 +1,139 @@
 <!DOCTYPE html>
-<html lang="kr">
+
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>두루고-아름고 연합 탱크 조종시스템</title>
+    <title>JavaScript Gamepad Demo</title>
+    <link rel="stylesheet" type="text/css" href="views/gpcon.css">
+    <link rel="stylesheet" type="text/css" href="views/control.css">
+    <script type="text/javascript" src="views/libhtml.js"></script>
+    <script type="text/javascript" src="views/libgp.js"></script>
+    <script type="text/javascript" src="views/gpcon.js"></script>
+
+    
+    <link rel="stylesheet" type="text/css" href="views/bootstrap/min.css">
+    <script type="text/javascript" src="views/bootstrap/min.js"></script>
 </head>
 
-<style>
-    .axes {
-      padding: 1em;
+<script>
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
     }
-    
-    .buttons {
-      margin-left: 1em;
-    }
-    
-    /*meter*/.axis {
-      min-width: 200px;
-      margin: 1em;
-    }
-    
-    .button {
-      display: inline-block;
-      
-      text-align: center;
-      padding: 0.75rem;
-      border: 1px solid black;
-    }
-    
-    .pressed {
-      background-color: black;
-      color: white;
-    }
-    
-    .touched::after {
-      content: "touch";
-      display: block;
-      position: absolute;
-      margin-top: -0.2em;
-      margin-left: -0.5em;
-      font-size: 0.8em;
-      opacity: 0.7;
-    }
-    </style>
+  }
+</script>
 
 <body>
-    <h2 id="start">Press a button on your controller to start</h2>
-</body>
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="/views/control.js"></script>
+  <div class="wrapper">
+    <div id="dummy" class="d-none"></div>
+    <button class="fullscr" onclick="toggleFullScreen();">Fullscreen</button>
 
-<script>
-    
-</script>
+    <div class="w-100 h-100">
+      <div class="d-flex main">
+        <div class="left p-2">
+          <div class="trigger" id="l1">l1</div>
+          <div class="trigger" id="l2">l2</div>
+
+          <div class="dpad mt-5">
+            <div class="w" id="wdir">W</div>
+            <div class="a" id="adir">A</div>
+            <div class="s" id="sdir">S</div>
+            <div class="d" id="ddir">D</div> 
+          </div>
+          
+          <div id="leftjoystick" class="joystick mt-4">
+            <div class="stick"> <div class="pointer"></div> </div>
+            <div class="stickpos"></div>
+          </div>
+        </div>
+
+        <div class="center flex-grow-1 p-2">a</div>
+
+        <div class="right p-2">
+          <div class="trigger" id="r1">r1</div>
+          <div class="trigger" id="r2">r2</div>
+
+          <div class="dpad mt-5">
+            <div class="w" id="ykey">Y</div>
+            <div class="a" id="xkey">X</div>
+            <div class="s" id="akey">A</div>
+            <div class="d" id="bkey">B</div> 
+          </div>
+
+          <div id="rightjoystick" class="joystick mt-4">
+            <div class="stick"> <div class="pointer"></div> </div>
+            <div class="stickpos"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div id="sol" class="nodisp">Gamepads don't appear to be supported
+    on this browser.  Bummer.</div>
+
+    <div id="prompt" class="nodisp">Attach a gamepad or press a gamepad
+    button</div>
+
+    <div id="main" class="nodisp">
+        <div id="button-bar">
+            <span class="button-bar-title">Gamepad: </span>
+            <span id="button-bar-box"></span>
+        </div>
+
+        <!--<div id="mode-select-box">
+            Mode
+            <select id="mode-select">
+                <option selected="selected" value="raw">Raw</option>
+                <option value="clamp">Clamped</option>
+            </select>
+        </div>-->
+
+        <hr>
+
+        <div id="gamepad-container">
+        </div>
+    </div>
+
+    <!-- Templates are copied for use when needed -->
+    <div id="templates">
+        <input id="template-button" type="button" class="selector-button">
+
+        <div id="template-gamepad" class="gamepad nodisp">
+            <div class="gamepad-title"></div>
+            (<div class="gamepad-mapping"></div>)
+            <div class="gamepad-id"></div>
+            <div class="gamepad-controls-center">
+                <div class="gamepad-controls">
+                    <div class="gamepad-buttons-box"></div>
+                    <div class="gamepad-axes-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="template-gamepad-button-container" class="gamepad-button-container">
+            <div class="gamepad-button"></div>
+            <div class="gamepad-button-label"></div>
+        </div>
+
+        <div id="template-gamepad-axis-pair-container" class="gamepad-axis-pair-container">
+            <div class="gamepad-axis-pair">
+                <div class="gamepad-axis-pip"></div>
+                <div class="gamepad-axis-crosshair">
+                    <div class="gamepad-axis-crosshair-v"></div>
+                    <div class="gamepad-axis-crosshair-h"></div>
+                </div>
+            </div>
+            <div class="gamepad-axis-pair-label"></div>
+            <div class="gamepad-axis-pair-value"></div>
+        </div>
+    </div>
+
+</body>
 </html>

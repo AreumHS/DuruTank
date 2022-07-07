@@ -1,0 +1,110 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.wrapper{
+    width: 100%;
+    height: 100vh;
+    background: lightgray;
+}
+
+.fullscr{
+    width: 96px;
+    height: 32px;
+    border: 0;
+    background: white;
+    border-radius: 16px;
+    margin: 16px;
+}
+
+.main{
+    width: 100%;
+    height: 80% !important;
+}
+
+
+.left{
+    background: white;
+    border-radius: 16px;
+    width: 100px;
+    margin-left: 16px;
+}
+.center{
+    background: white;
+    border-radius: 16px;
+    margin: 0 16px;
+}
+
+.right{
+    background: white;
+    border-radius: 16px;
+    width: 100px;
+    margin-right: 16px;
+}
+
+
+
+.trigger{
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 24px;
+    width: 80%;
+    margin: 8px auto;
+    text-align:center;
+}
+
+.pressed{
+    color: white;
+    background: black;
+}
+
+
+
+.dpad{
+    padding: 0;
+    height:4.5rem;
+    width: 4.5rem;
+    position:relative;
+    margin: auto;
+}
+.w, .a, .s, .d{
+    position: absolute;
+    border: 1px solid black;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align:center;
+    border-radius: 8px;
+}
+.w { left: 1.5rem; }
+.d { top: 1.5rem; left: 3rem; }  
+.a { top: 1.5rem; right: 3rem; }
+.s { top: 3rem; left: 1.5rem;}
+
+
+
+.joystick {
+    text-align: center;
+    font-size: 12px;
+}
+
+.stick{
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 50%;
+    position: relative;
+}
+
+.pointer{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: black;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-4px) translateY(-4px);
+}
