@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import io.socket.client.Socket
+import io.socket.emitter.Emitter
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
@@ -26,11 +27,13 @@ class MainActivity : AppCompatActivity() {
             Log.v("SocketIO", edittext.text.toString())
         }
 
-        //mSocket.on("get message", onMessage)
-//        mSocket.connect()
+        mSocket.on("coninput", onMessage)
     }
 
-    /*var onMessage = Emitter.Listener { args ->
+    var onMessage = Emitter.Listener { args ->
+
+        Log.d("main activity","값 받아옴")
+        /*
         val sendtext: TextView = findViewById(R.id.sendtext) as TextView
         val obj = JSONObject(args[0].toString())
         val a = sendtext.text.toString()
@@ -39,10 +42,10 @@ class MainActivity : AppCompatActivity() {
             override fun run() {
                 runOnUiThread(Runnable {
                     kotlin.run {
-                        sendtext.text = a + "\n" + obj.get("name") + ": " + obj.get("message")
+                        sendtext.text = a /*+ "\n" + obj.get("name") + ": " + obj.get("message")*/
                     }
                 })
             }
-        }).start()
-    }*/
+        }).start()**/
+    }
 }

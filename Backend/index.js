@@ -23,17 +23,18 @@ io.on('connection', (socket) => {
 
     socket.on('coninput', (data) => {
         console.log('Controller input val : ' + JSON.stringify(data));
-        socket.broadcast.emit('input', data);
+        socket.broadcast.emit('coninput', JSON.stringify(data));
     })
 
     socket.on('phoneinput', (data) => {
-        console.log('Controller input val : ' + JSON.stringify(data));
-        socket.broadcast.emit('input', data);
+        console.log('phone input val : ' + JSON.stringify(data));
+        socket.broadcast.emit('phoneinput', data);
     })
 
     socket.on('disconnect', () => {
         console.log(socket.type + " is now disconnected");
     });
 });
+
 
 http.listen(8081, () => console.log("server opened at 8081 -> 30001"));

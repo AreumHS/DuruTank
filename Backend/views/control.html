@@ -5,12 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <title>JavaScript Gamepad Demo</title>
-    <link rel="stylesheet" type="text/css" href="views/control.css">
-    <script type="text/javascript" src="views/controller.js"></script>
-
+    
     
     <link rel="stylesheet" type="text/css" href="views/bootstrap/min.css">
     <script type="text/javascript" src="views/bootstrap/min.js"></script>
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="views/control.css">
+
+    <script type="text/javascript" src="views/controller.js"></script>
+    <script type="text/javascript" src="views/socket.js"></script>
 </head>
 
 <script>
@@ -37,10 +42,10 @@
           <div class="trigger" id="l2">l2</div>
 
           <div class="dpad mt-5">
-            <div class="w" id="wdir">W</div>
-            <div class="a" id="adir">A</div>
-            <div class="s" id="sdir">S</div>
-            <div class="d" id="ddir">D</div> 
+            <div class="w" id="dw">W</div>
+            <div class="a" id="da">A</div>
+            <div class="s" id="ds">S</div>
+            <div class="d" id="dd">D</div> 
           </div>
           
           <div id="leftjoystick" class="joystick mt-4">
@@ -56,10 +61,10 @@
           <div class="trigger" id="r2">r2</div>
 
           <div class="dpad mt-5">
-            <div class="w" id="ykey">Y</div>
-            <div class="a" id="xkey">X</div>
-            <div class="s" id="akey">A</div>
-            <div class="d" id="bkey">B</div> 
+            <div class="w" id="ky">Y</div>
+            <div class="a" id="kx">X</div>
+            <div class="s" id="ka">A</div>
+            <div class="d" id="kb">B</div> 
           </div>
 
           <div id="rightjoystick" class="joystick mt-4">

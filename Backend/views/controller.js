@@ -1,5 +1,7 @@
 "use strict";
 
+var conn = {};
+
 let qs = function(s,p){
     if(p){ return p.querySelector(s); }
     return document.querySelector(s);
@@ -11,10 +13,11 @@ function clamp(x, y) {
     return [x, y];
 }
 
-function updateUI() {
-    let mapping = ['akey','bkey','xkey','ykey','l1','r1','l2','r2',-1,-1,-1,-1,'wdir','sdir','adir','ddir',-1];
 
+function updateUI() {
+    let mapping = ['ka','kb','kx','ky','l1','r1','l2','r2',-1,-1,-1,-1,'dw','ds','da','dd',-1];
     let gp = navigator.getGamepads()[0];
+    let tmp = {};
       
     if (!gp || !gp.connected) return; 
      
@@ -26,8 +29,10 @@ function updateUI() {
 
         if (button.pressed) {
             nowbutton.classList.add("pressed");
+            tmp[mapping[i]] = 1;
         } else {
             nowbutton.classList.remove("pressed");
+            tmp[mapping[i]] = 0;
         }
     }
 
@@ -43,6 +48,9 @@ function updateUI() {
     lpointer.style.left = (lX + 1) / 2 * 100 + '%';
     lpointer.style.top = (lY + 1) / 2 * 100 + '%';
 
+    tmp['lx'] = lposX.toFixed(2);
+    tmp['ly'] = lposY.toFixed(2);
+
     let lStr = lposX.toFixed(2) + ',' + lposY.toFixed(2);
     qs("#leftjoystick .stickpos").innerHTML = lStr;
 
@@ -56,8 +64,17 @@ function updateUI() {
     rpointer.style.left = (rX + 1) / 2 * 100 + '%';
     rpointer.style.top = (rY + 1) / 2 * 100 + '%';
 
+    tmp['rx'] = rposX.toFixed(2);
+    tmp['ry'] = rposY.toFixed(2);
+
     let rStr = rposX.toFixed(2) + ',' + rposY.toFixed(2);
     qs("#rightjoystick .stickpos").innerHTML = rStr;
+
+
+    if(JSON.stringify(tmp) !== JSON.stringify(conn)){
+        conn = tmp;
+        socket.emit("coninput", conn);
+    }
 }
 
 function onFrame() {
