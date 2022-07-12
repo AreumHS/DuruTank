@@ -27,7 +27,8 @@ io.on('connection', (socket) => {
     })
 
     socket.on('phoneinput', (data) => {
-        console.log('phone input val : ' + JSON.stringify(data));
+        //console.log('phone input val : ' + JSON.stringify(data));
+        //var bitmap = new Buffer(data, 'base64');
         socket.broadcast.emit('phoneinput', data);
     })
 
