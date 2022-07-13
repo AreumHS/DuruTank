@@ -51,8 +51,8 @@ function updateUI() {
     tmp['lx'] = lposX.toFixed(2);
     tmp['ly'] = lposY.toFixed(2);
 
-    let lStr = lposX.toFixed(2) + ',' + lposY.toFixed(2);
-    qs("#leftjoystick .stickpos").innerHTML = lStr;
+    //let lStr = lposX.toFixed(2) + ',' + lposY.toFixed(2);
+    //qs("#leftjoystick .stickpos").innerHTML = lStr;
 
     // right joystick
     let rposX = gp.axes[2];
@@ -67,8 +67,8 @@ function updateUI() {
     tmp['rx'] = rposX.toFixed(2);
     tmp['ry'] = rposY.toFixed(2);
 
-    let rStr = rposX.toFixed(2) + ',' + rposY.toFixed(2);
-    qs("#rightjoystick .stickpos").innerHTML = rStr;
+    //let rStr = rposX.toFixed(2) + ',' + rposY.toFixed(2);
+    //qs("#rightjoystick .stickpos").innerHTML = rStr;
 
 
     if(JSON.stringify(tmp) !== JSON.stringify(conn)){

@@ -30,12 +30,11 @@
   }
 </script>
 
-<body>
-  <div class="wrapper">
+<body class="wrapper">
+  <div>
     <div id="dummy" class="d-none"></div>
-    <button class="fullscr" onclick="toggleFullScreen();">Fullscreen</button>
 
-    <div class="w-100">
+    <div class="w-100 mt-3">
       <div class="d-flex main">
         <div class="left p-2">
           <div class="trigger" id="l1">l1</div>
@@ -50,14 +49,16 @@
           
           <div id="leftjoystick" class="joystick mt-4">
             <div class="stick"> <div class="pointer"></div> </div>
-            <div class="stickpos"></div>
+            
           </div>
+          <br/>
+          <button class="fullscr" onclick="toggleFullScreen();">Fullscreen</button>
         </div>
 
-        <div class="center flex-grow-1 p-2">
-          <canvas id="remote" class="" style="border-radius: 8px; width: 452px;">
-
-          </canvas>
+        <div class="center flex-grow-1 ">
+          <div class="viewer">
+            <iframe src="http://116.127.164.3:30003/browserfs.html" style="height:100%; width:100%;"></iframe>
+          </div>
         </div>
 
         <div class="right p-2">

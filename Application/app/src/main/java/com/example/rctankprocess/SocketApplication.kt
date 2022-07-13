@@ -10,9 +10,9 @@ class SocketApplication {
         private lateinit var socket : Socket
         fun get(): Socket {
             try{
-                socket = IO.socket("http://koder.myds.me:30001");
+                socket = IO.socket("http://192.168.0.2:30001");
             } catch( e : URISyntaxException ){
-                Log.v("SocketIO", "error connecting to socket");
+                Log. v("SocketIO", "error connecting to socket");
             }
             return socket
         }

@@ -28,29 +28,31 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 import java.util.Base64
 
-class MainActivity : AppCompatActivity(), ImageReader.OnImageAvailableListener{
+class MainActivity : AppCompatActivity(){
     lateinit var mSocket: Socket
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val startBtn : Button = findViewById<Button>(R.id.btn_start)
-        val textureView: TextureView = findViewById<TextureView>(R.id.texture)
-        assert(textureView != null)
+        //val startBtn : Button = findViewById<Button>(R.id.btn_start)
+        //val textureView: TextureView = findViewById<TextureView>(R.id.texture)
+        //assert(textureView != null)
+        val sendbutton: Button = findViewById(R.id.btn_start)
+        sendbutton.setOnClickListener{
+            mSocket.emit("login", "smartphone");
+            Log.v("SocketIO", "Sended")
+        }
 
         mSocket = SocketApplication.get()
         mSocket.connect()
         mSocket.emit("login", JSONObject("{\"type\": \"smartphone\"}"));
 
         //val edittext: EditText = findViewById<EditText>(R.id.edittext)
-
-
-
-
-        mSocket.on("coninput", onMessageReceived)
+        Log.i("received","test")
+        mSocket.on("coninput", onMessageReceived);
 
         // 카메라 파트
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
                 val permission = arrayOf(Manifest.permission.CAMERA)
                 requestPermissions(permission, 1122)
@@ -58,14 +60,14 @@ class MainActivity : AppCompatActivity(), ImageReader.OnImageAvailableListener{
             else { setFragment() }
         }
         else{ setFragment() }
-
+        */
     }
 
 
     private val onMessageReceived = Emitter.Listener { args ->
         // 전달받은 데이터는 아래와 같이 추출할 수 있습니다.
         //val receivedData = args[0] as JSONObject
-        Log.i("received", args[0].toString());
+        Log.v("received", args[0].toString());
         // your code...
     }
 
@@ -90,7 +92,7 @@ class MainActivity : AppCompatActivity(), ImageReader.OnImageAvailableListener{
     }*/
 
     // 카메라 파트
-
+    /*
     var previewHeight = 0;
     var previewWidth = 0;
     var sensorOrientation = 0;
@@ -225,4 +227,6 @@ class MainActivity : AppCompatActivity(), ImageReader.OnImageAvailableListener{
     }
 
     override fun onDestroy() { super.onDestroy() }
+
+     */
 }

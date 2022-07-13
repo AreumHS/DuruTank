@@ -11,12 +11,14 @@ body,html{
 }
 
 .fullscr{
-    width: 96px;
-    height: 32px;
+    width: 72px;
+    height: 24px;
     border: 0;
-    background: white;
+    background: black;
+    color: white;
     border-radius: 16px;
-    margin: 16px;
+    font-size: 10px;
+    margin: 6px;
 }
 
 .main{
@@ -32,8 +34,6 @@ body,html{
     margin-left: 16px;
 }
 .center{
-    background: white;
-    border-radius: 16px;
     margin: 0 16px;
 }
 
@@ -107,4 +107,14 @@ body,html{
     left: 50%;
     top: 50%;
     transform: translateX(-4px) translateY(-4px);
+}
+
+.viewer{
+    margin: 0 auto;
+    border-radius: 16px;
+    height: 98%;
+}
+
+.viewer iframe{
+    border-radius: 16px;
 }
