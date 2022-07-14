@@ -1,35 +1,20 @@
 package com.example.rctankprocess
 
+import android.Manifest
 import android.os.Bundle
 import android.util.Log
-import android.view.TextureView
-import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import org.json.JSONObject
-import android.Manifest
-import android.app.Fragment
-import android.content.Context
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Matrix
-import android.hardware.camera2.CameraAccessException
-import android.hardware.camera2.CameraManager
-import android.media.Image
-import android.media.ImageReader
-import android.os.Build
-import android.util.Size
-import android.view.Surface
-import com.example.rctankprocess.CameraConnectionFragment
-import com.example.rctankprocess.ImageUtils
-import java.io.ByteArrayOutputStream
-import java.util.*
-import java.util.Base64
+
 
 class MainActivity : AppCompatActivity(){
     lateinit var mSocket: Socket
+    //lateinit var port : ;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,11 +22,7 @@ class MainActivity : AppCompatActivity(){
         //val startBtn : Button = findViewById<Button>(R.id.btn_start)
         //val textureView: TextureView = findViewById<TextureView>(R.id.texture)
         //assert(textureView != null)
-        val sendbutton: Button = findViewById(R.id.btn_start)
-        sendbutton.setOnClickListener{
-            mSocket.emit("login", "smartphone");
-            Log.v("SocketIO", "Sended")
-        }
+
 
         mSocket = SocketApplication.get()
         mSocket.connect()
@@ -61,6 +42,38 @@ class MainActivity : AppCompatActivity(){
         }
         else{ setFragment() }
         */
+
+        val permission_list = arrayOf<String>(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+        ActivityCompat.requestPermissions(this@MainActivity, permission_list, 1);
+
+        val sendbutton: Button = findViewById(R.id.btn_start)
+        sendbutton.setOnClickListener{
+
+            val tv : TextView = findViewById<TextView>(R.id.textView);
+            tv.setText("아시발 ㅋㅋ");
+
+        }
+
+        if (isBluetoothSupport()) {   // 블루투스 지원 체크
+            if(repository.isBluetoothEnabled()){ // 블루투스 활성화 체크
+                //Progress Bar
+                setInProgress(true)
+                //디바이스 스캔 시작
+                scanDevice()
+            }else{
+                // 블루투스를 지원하지만 비활성 상태인 경우
+                // 블루투스를 활성 상태로 바꾸기 위해 사용자 동의 요청
+                _requestBleOn.value = Event(true)
+            }
+        }else{ //블루투스 지원 불가
+            //Toast Massage
+            Util.showNotification("Bluetooth is not supported.")
+        }
+
     }
 
 
