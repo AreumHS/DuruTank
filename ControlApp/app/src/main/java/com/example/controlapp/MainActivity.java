@@ -101,19 +101,20 @@ public class MainActivity extends AppCompatActivity {
         try{
             port.open(connection);
             port.setParameters(115200, 8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
+
+            port.write("000000000000 200 200 200 200".getBytes(), 1000);
             Toast myToast = Toast.makeText(this.getApplicationContext(),"연결 성공.", Toast.LENGTH_SHORT);
             myToast.show();
 
-            port.write("000000000000 100 100 100 100".getBytes(), 100);
         }catch(Exception e) {
             Toast myToast = Toast.makeText(this.getApplicationContext(),"연결 실패.", Toast.LENGTH_SHORT);
             myToast.show();
         }
 
-        mSocket.on("coninput", onNewMessage);
+        //mSocket.on("coninput", onNewMessage);
     }
 
-    private Emitter.Listener onNewMessage = new Emitter.Listener() {
+    /*private Emitter.Listener onNewMessage = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             JSONObject data = (JSONObject) args[0];
@@ -125,5 +126,5 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    };
+    };*/
 }

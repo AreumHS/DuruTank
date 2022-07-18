@@ -13,6 +13,12 @@ app.get('/', function(req,res){
     res.render('control.html');
 });
 
+function digit(tmp){
+    if(tmp.length == 1) return "00"+tmp;
+    if(tmp.length == 2) return "0"+tmp;
+    if(tmp.length == 3) return tmp.toString();
+}
+
 
 io.on('connection', (socket) => {
     console.log("[ something logged in. ]");
@@ -28,11 +34,20 @@ io.on('connection', (socket) => {
         let wasd = data.dw.toString() + data.da.toString() + data.ds.toString() + data.dd.toString();
         let trig = data.l1.toString() + data.l2.toString() + data.r1.toString() + data.r2.toString();
 
-        let lx = (data.lx*100+100).toString();
-        let ly = (data.ly*100+100).toString();
-        let rx = (data.rx*100+100).toString();
-        let ry = (data.ry*100+100).toString();
+        let lx = digit((data.lx*100+100).toFixed().toString());
+        let ly = digit((data.ly*100+100).toFixed().toString());
+        let rx = digit((data.rx*100+100).toFixed().toString());
+        let ry = digit((data.ry*100+100).toFixed().toString());
 
+            console.log((data.lx*100+100).toString());
+        
+            console.log((data.ly*100+100).toString());
+        
+            console.log((data.rx*100+100).toString());
+        
+            console.log((data.ry*100+100).toString());
+        
+        }*/
         let querystr = abxy + wasd + trig + " " + lx + " " + ly + " " + rx + " " + ry;
         console.log(querystr);
         socket.broadcast.emit('coninput', querystr);
@@ -51,5 +66,6 @@ io.on('connection', (socket) => {
 
 
 http.listen(8081, () => console.log("server opened at 8081 -> 30001"));
+
 
 //////////////////////// 카메라 파트 //////////////////////
