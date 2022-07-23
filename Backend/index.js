@@ -39,6 +39,7 @@ io.on('connection', (socket) => {
         let rx = digit((data.rx*100+100).toFixed().toString());
         let ry = digit((data.ry*100+100).toFixed().toString());
 
+        /*if(lx ==undefined ||ly ==undefined || rx ==undefined || ry ==undefined){
             console.log((data.lx*100+100).toString());
         
             console.log((data.ly*100+100).toString());
